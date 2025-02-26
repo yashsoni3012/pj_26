@@ -1,0 +1,27 @@
+.experienceTitle h1{
+    color: #00541F;
+}
+.experienceTitle{
+    color: #00541F;
+}
+.experienceText{
+    color: #6C866C;
+}
+.experience-container {
+    width: 500px;  /* Set fixed width */
+    height: 300px; /* Set fixed height */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: hidden; /* Prevent overflow */
+}
+  
+.experience-container img {
+    width: 100%;  /* Ensure the image covers the width */
+    height: 300px; /* Ensure the image covers the height */
+    max-width: max-content;
+    object-fit: cover; /* Crop to fit the container */
+    border: 5px solid #00541F;
+    border-radius: 30px;
+    cursor: pointer;
+}

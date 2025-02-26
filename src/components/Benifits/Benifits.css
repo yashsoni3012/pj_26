@@ -1,0 +1,41 @@
+.benifitTitle h1{
+    color: #00541F;
+}
+
+.benefits-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.benefits {
+    flex: 1;
+    text-align: left;
+}
+.benefits p {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.benefits img {
+    width: 40px;
+    height: 40px;
+   
+}
+
+.benifitImage-container {
+    width: 400px;  /* Set fixed width */
+    height: 500px; /* Set fixed height */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: hidden; /* Prevent overflow */
+}
+  
+.benifitImage-container img {
+    width: 100%;  /* Ensure the image covers the width */
+    height: 500px; /* Ensure the image covers the height */
+    max-width: max-content;
+    object-fit: cover; /* Crop to fit the container */
+}

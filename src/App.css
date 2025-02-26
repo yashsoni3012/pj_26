@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family:fangsong;;
+}
+
+.green-line {
+    width:70%; /* Set the width to 60% */
+    height: 4px; /* Line thickness */
+    background-color: green; /* Line color */
+    margin: 20px auto; /* Centers the line */
+  }
+  

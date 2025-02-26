@@ -1,0 +1,21 @@
+.card img{
+    border: 2px solid #4F894F;
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+}
+
+.card a{
+    background-color: #4F894F;  
+    border: 1px solid #4F894F;
+}
+.card a:hover{
+    background-color: #5c9c5c;
+    border: 1px solid #5c9c5c;
+}
+.card-title{
+    color: #00541F;
+}
+.card-text{
+    color: #6C866C;
+}
