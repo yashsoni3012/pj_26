@@ -28,13 +28,16 @@ const Navbar = () => {
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav m-auto mb-2 mb-lg-0 fs-5">
-                           
-
                             <Link to="/">HOME</Link>
                             <Link to="treatment">TREATMENT</Link>
                             <Link to="aboutus">ABOUT US</Link>
                             <Link to="aboutus">CONTACT US</Link>
                         </ul>
+                    </div>
+
+                    <div>
+                    <Link to="#"><i class="fa-solid fa-user fs-5 me-3" style={{color:"black"}}/></Link>
+                    <Link to="#"><i class="fa-solid fa-cart-shopping fs-5 me-5" style={{color:"black"}}></i></Link>
                     </div>
                 </div>
             </nav>

@@ -84,11 +84,11 @@ const AyurvedicBenefits = () => {
                 <div className="col-lg-3 ">
                     {benefits.slice(0, 5).map((benefit, index) => (
                         <div className="d-flex align-items-center mb-3" key={index}>
-                            <img src={benefit.icon} alt="" className="me-3" style={{ width: "40px", height: "40px" }} />
                             <div>
                                 <h5 className="mb-1" style={{ color: "#174D29", fontWeight: "bold" }}>{benefit.title}</h5>
                                 <p className="mb-0">{benefit.desc}</p>
                             </div>
+                            <img src={benefit.icon} alt="" className="me-3" style={{ width: "40px", height: "40px" }} />
                         </div>
                     ))}
                 </div>
