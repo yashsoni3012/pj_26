@@ -150,9 +150,9 @@ const LoginPage = () => {
                 <i className="fa-brands fa-google google-icon"></i>
               </div>
             </form>
-            
-            <Link to="/login">
-              <button className="btn btn-outline-dark rounded-pill mx-auto">Sign Up</button>
+
+            <Link to="/login" className="rounded-pill bg-light mt-2">
+              <button className="btn btn-outline-dark rounded-pill px-4 py-2 mx-auto">Sign Up</button>
             </Link>
           </div>
         </div>

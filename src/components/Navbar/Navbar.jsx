@@ -35,9 +35,9 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <div>
+                    <div >
                     <Link to="/login"><i class="fa-solid fa-user fs-5 me-3" style={{color:"black"}}/></Link>
-                    <Link to="/signup"><i class="fa-solid fa-cart-shopping fs-5 me-5" style={{color:"black"}}></i></Link>
+                    <Link to="#"><i class="fa-solid fa-cart-shopping fs-5 me-5" style={{color:"black"}}></i></Link>
                     </div>
                 </div>
             </nav>

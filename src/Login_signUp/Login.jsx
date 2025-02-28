@@ -77,7 +77,7 @@ const LoginPage = () => {
     return (
         <div className="container-fluid d-flex align-items-center justify-content-center vh-100">
             <div className="card shadow-lg rounded-4 overflow-hidden auth-container w-75" style={{ minHeight: "60vh" }}>
-                <div className="row g-0"  style={{ minHeight: "70vh" }}>
+                <div className="row g-0" style={{ minHeight: "70vh" }}>
                     {/* Left Side - Login */}
                     <div className="col-md-6 p-5 d-flex flex-column justify-content-center">
                         <h2 className="text-success text-center fw-bold">Login In</h2>
@@ -100,7 +100,7 @@ const LoginPage = () => {
                         <p className="text-center">
                             Create your free account and enjoy seamless access to <b>PRACHIN JADIBUTI</b>
                         </p>
-                        <Link to="/signup">
+                        <Link to="/signup" className="rounded-pill">
                             <button className="btn btn-outline-light rounded-pill px-4 py-2 mx-auto">SIGN UP</button>
                         </Link>
                     </div>
