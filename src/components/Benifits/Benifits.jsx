@@ -58,6 +58,7 @@ import React from 'react';
 import '../Benifits/Benifits.css';
 import centerImage from '../../assets/benifitImg.jpg'; // Replace with your actual image
 import leafIcon from '../../assets/leaf.png'; // Replace with actual icons
+import descriptionImg from '../../assets/description.jpg'; // Replace with actual image
 
 
 const AyurvedicBenefits = () => {
@@ -67,7 +68,7 @@ const AyurvedicBenefits = () => {
         { title: "Reduces Stress & Anxiety", desc: "Calms the mind with Brahmi & Jatamansi.", icon: leafIcon },
         { title: "Enhances Skin & Hair Health", desc: "Promotes glow with Aloe Vera & Bhringraj.", icon: leafIcon },
         { title: "No Harmful Chemicals", desc: "Made from pure, plant-based ingredients.", icon: leafIcon },
-        
+
         { title: "Balances Body & Mind", desc: "Restores harmony through Dosha balancing.", icon: leafIcon },
         { title: "Improves Digestion", desc: "Aids gut health with Triphala, Ajwain, and Hing.", icon: leafIcon },
         { title: "Supports Detoxification", desc: "Removes toxins with Neem & Manjistha.", icon: leafIcon },
@@ -78,7 +79,7 @@ const AyurvedicBenefits = () => {
     return (
         <div className="container">
             <h2 className="text-center mb-4" style={{ fontWeight: "bold", color: "#174D29" }}>Benefits of Ayurvedic Medicine</h2>
-            
+
             <div className="row align-items-center mt-5">
                 {/* Left Side (First 5 Benefits) */}
                 <div className="col-lg-3 ">
@@ -95,7 +96,7 @@ const AyurvedicBenefits = () => {
 
                 {/* Center Image */}
                 <div className="col-lg-6 text-center">
-                    <img src={centerImage} alt="Ayurvedic Treatments" className="img-fluid" style={{height:"550px",width:"400px"}}/>
+                    <img src={centerImage} alt="Ayurvedic Treatments" className="img-fluid" style={{ height: "550px", width: "400px" }} />
                 </div>
 
                 {/* Right Side (Next 5 Benefits) */}
@@ -111,6 +112,14 @@ const AyurvedicBenefits = () => {
                     ))}
                 </div>
             </div>
+
+            <div class="green-line mt-5"></div>
+
+            <div className='mt-5'>
+                <img src={descriptionImg} className='w-100' />
+            </div>
+
+            <div class="green-line"></div>
         </div>
     );
 };
