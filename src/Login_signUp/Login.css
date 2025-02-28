@@ -1,0 +1,20 @@
+/* .formContainer{
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 500px;
+    width: 100%;
+}
+
+.loginContainer{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #4F894F;
+    height: 500px;
+    width: 100%;
+} */
+
+.login-right{
+    background-color: #4F894F;
+}
+.login-left{
+    background-color: #4F894F;
+}

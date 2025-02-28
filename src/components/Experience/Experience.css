@@ -1,3 +1,7 @@
+.experience{
+    text-align: left;
+}
+
 .experienceTitle h1{
     color: #00541F;
 }
@@ -6,6 +10,7 @@
 }
 .experienceText{
     color: #6C866C;
+    text-align: justify;
 }
 .experience-container {
     width: 500px;  /* Set fixed width */

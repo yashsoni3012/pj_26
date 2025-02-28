@@ -31,13 +31,13 @@ const Navbar = () => {
                             <Link to="/">HOME</Link>
                             <Link to="treatment">TREATMENT</Link>
                             <Link to="aboutus">ABOUT US</Link>
-                            <Link to="aboutus">CONTACT US</Link>
+                            <Link to="contactus">CONTACT US</Link>
                         </ul>
                     </div>
 
                     <div>
-                    <Link to="#"><i class="fa-solid fa-user fs-5 me-3" style={{color:"black"}}/></Link>
-                    <Link to="#"><i class="fa-solid fa-cart-shopping fs-5 me-5" style={{color:"black"}}></i></Link>
+                    <Link to="/login"><i class="fa-solid fa-user fs-5 me-3" style={{color:"black"}}/></Link>
+                    <Link to="/signup"><i class="fa-solid fa-cart-shopping fs-5 me-5" style={{color:"black"}}></i></Link>
                     </div>
                 </div>
             </nav>
@@ -45,6 +45,8 @@ const Navbar = () => {
                 <button><i class="fa-solid fa-file-medical"></i> HEALTH CHECKUP</button>
             </div>
         </div>
+
+       
     );
 };
 

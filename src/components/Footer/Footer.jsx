@@ -18,21 +18,23 @@ const Footer = () => {
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 text-light">
               <h5>Popular Links</h5>
-              <ul className="footer">
+              <p><ul className="footer">
                 <li>Diabetes</li>
                 <li>Thyroid</li>
                 <li>Constipation & Gas</li>
                 <li>Joint Pain</li>
-              </ul>
+              </ul></p>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 text-light">
               <h5>Quick Link</h5>
-              <ul className="footer">
-                <li>Home</li>
-                <li>Treatments</li>
-                <li>About Us</li>
-                <li>Contact Us</li>
-              </ul>
+              <div>
+                <ul className="footer">
+                  <li>Home</li>
+                  <li>Treatments</li>
+                  <li>About Us</li>
+                  <li>Contact Us</li>
+                </ul>
+              </div>
             </div>
             <div className="col-lg-3 col-md-6 col-sm-12 text-light">
               <h5>Have a Questions ? </h5>
