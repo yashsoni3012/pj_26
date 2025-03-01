@@ -113,10 +113,9 @@ const AyurvedicBenefits = () => {
                 </div>
             </div>
 
-            <div class="green-line mt-5"></div>
 
             <div className='mt-5'>
-                <img src={descriptionImg} className='w-100' />
+                <img src={descriptionImg} className='w-100 h-100'/>
             </div>
 
             <div class="green-line"></div>

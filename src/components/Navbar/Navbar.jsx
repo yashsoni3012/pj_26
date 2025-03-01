@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <div className="navigationbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
-                <div class="container-fluid">
+                <div class="container">
                     <a href="#">
                         <div>
                             <img src={logo} alt="Logo" />
@@ -35,14 +35,16 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <div >
-                    <Link to="/login"><i class="fa-solid fa-user fs-5 me-3" style={{color:"black"}}/></Link>
-                    <Link to="#"><i class="fa-solid fa-cart-shopping fs-5 me-5" style={{color:"black"}}></i></Link>
+                    <div>
+                    <Link to="/login"><i class="fa-solid fa-user fs-5  me-3" style={{color:"black"}}/></Link>
+                    <Link to="#"><i class="fa-solid fa-cart-shopping fs-5" style={{color:"black"}}></i></Link>
                     </div>
                 </div>
             </nav>
+
+            {/* personalInfo Button */}
             <div className="checkup text-center d-flex justify-content-center">
-                <button><i class="fa-solid fa-file-medical"></i> HEALTH CHECKUP</button>
+                <Link to="/health"><button><i class="fa-solid fa-file-medical"></i> HEALTH CHECKUP</button></Link>
             </div>
         </div>
 

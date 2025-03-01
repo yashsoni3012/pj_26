@@ -7,6 +7,7 @@ import Carousel from './components/Carousel/Carousel'
 import Cards from './components/Cards/Cards'
 import Login from './Login_signUp/Login'
 import Signup from './Login_signUp/Signup'
+import PersonalInfo from './Health_Checkup/PersonalInfo'
 
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
       <div>
 
         <BrowserRouter>
-          <Navbar />
+        <Navbar />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='treatment' element />
@@ -24,7 +25,10 @@ function App() {
             <Route path='contactus' element />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="*" element={<Login />} /> {/*{Default route }
+            <Route path="*" element={<Login />} /> 
+            <Route path='/health' element={<PersonalInfo/>} />
+            {/*{Default route }
+           
 
             {/* <Route path='/login' element={<Login/>} /> */}
             {/* <Route path='/signup' element={<Signup/>} /> */}
