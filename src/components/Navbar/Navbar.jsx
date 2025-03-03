@@ -8,11 +8,16 @@ const Navbar = () => {
         <div className="navigationbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
                 <div class="container">
-                    <a href="#">
+                    {/* <a href="#">
                         <div>
                             <img src={logo} alt="Logo" />
                         </div>
-                    </a>
+                    </a> */}
+                    <Link to="/">
+                        <div>
+                            <img src={logo} alt="Logo" />
+                        </div>
+                    </Link>
 
                     <button
                         class="navbar-toggler"
@@ -35,9 +40,9 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    <div>
-                    <Link to="/login"><i class="fa-solid fa-user fs-5  me-3" style={{color:"black"}}/></Link>
-                    <Link to="#"><i class="fa-solid fa-cart-shopping fs-5" style={{color:"black"}}></i></Link>
+                    <div >
+                        <Link to="/login"><i class="fa-solid fa-user fs-5  me-3" style={{ color: "black" }} /></Link>
+                        <Link to="#"><i class="fa-solid fa-cart-shopping fs-5" style={{ color: "black" }}></i></Link>
                     </div>
                 </div>
             </nav>
@@ -48,7 +53,7 @@ const Navbar = () => {
             </div>
         </div>
 
-       
+
     );
 };
 
