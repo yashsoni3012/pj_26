@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, ProgressBar } from "react-bootstrap";
+import { Form, Button, ProgressBar, Container, Row, Col } from "react-bootstrap";
 import "../Health_Checkup/PersonalInfo.css";
 
 const MultiStepForm = () => {
@@ -74,8 +74,76 @@ const MultiStepForm = () => {
 
                     {step === 2 && (
                         <>
-                            <h4>Medical History</h4>
-                            <div className="row">
+                            <h4 className="fw-bold">Medical Information</h4>
+                            <Row className="mt-4">
+                                <Col xs={6} sm={4} md={3}> {/* Controls width */}
+                                    <Form.Group controlId="sufferingFrom" className="mb-3 small-dropdown">
+                                        <Form.Select className="small-select">
+                                            <option>Seffering From</option>
+                                            <option>Diabetes</option>
+                                            <option>Hypertension</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <h5 className="mb-3 fw-bold">Health Parameters for Diabetes Patients</h5>
+
+                            <Row className="mb-4">
+                                <Col xs={12} sm={6} md={6} lg={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Select className="small-select">
+                                            <option>Type Of Diabetes</option>
+                                            <option>Type 1</option>
+                                            <option>Type 2</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                <Col xs={12} sm={6} md={6} lg={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Select className="small-select">
+                                            <option>Body Mass</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <Row className="mb-4">
+                                <Col xs={12} sm={6} md={6} lg={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Select className="small-select">
+                                            <option>Existing Medication & Treatment</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                <Col xs={12} sm={6} md={6} lg={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Select className="small-select">
+                                            <option>Blood Sugar Levels</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+
+                            <Row>
+                                <Col xs={12} sm={6} md={6} lg={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Select className="small-select">
+                                            <option>Symptoms & Complications</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                <Col xs={12} sm={6} md={6} lg={6}>
+                                    <Form.Group className="mb-3">
+                                        <Form.Select className="small-select">
+                                            <option>Associated Health Conditions (Co-morbidities)</option>
+                                            </Form.Select>
+                                    </Form.Group>
+                                </Col>
+                                </Row>
+
+
+                                            {/* <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <Form.Control type="text" placeholder="Known Allergies" />
                                 </div>
@@ -88,41 +156,41 @@ const MultiStepForm = () => {
                                 <div className="col-md-6 mb-3">
                                     <Form.Control type="text" placeholder="Chronic Diseases" />
                                 </div>
+                            </div> */}
+                                        </>
+                    )}
+
+                                        {step === 3 && (
+                                            <>
+                                                <h4>Review & Submit</h4>
+                                                <p>Confirm your details before submitting.</p>
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label="I confirm that all information provided is correct."
+                                                />
+                                            </>
+                                        )}
+
+                                        {/* Navigation Buttons */}
+                                        <div className="d-flex justify-content-between mt-4">
+                                            {step > 1 && (
+                                                <Button
+                                                    variant="success"
+                                                    className="text-center justify-content-center d-flex"
+                                                    onClick={handlePrev}
+                                                    style={{ width: "30%", display: "block", margin: "0 auto" }}
+                                                >
+                                                    Back
+                                                </Button>
+                                            )}
+                                            <Button variant="success" onClick={handleNext} style={{ width: "30%", display: "block", margin: "0 auto" }}>
+                                                {step === totalSteps ? "Submit" : "Next"}
+                                            </Button>
+                                        </div>
+                                    </Form>
+                                </div>
                             </div>
-                        </>
-                    )}
-
-                    {step === 3 && (
-                        <>
-                            <h4>Review & Submit</h4>
-                            <p>Confirm your details before submitting.</p>
-                            <Form.Check
-                                type="checkbox"
-                                label="I confirm that all information provided is correct."
-                            />
-                        </>
-                    )}
-
-                    {/* Navigation Buttons */}
-                    <div className="d-flex justify-content-between mt-4">
-                        {step > 1 && (
-                            <Button
-                                variant="success"
-                                className="text-center justify-content-center d-flex"
-                                onClick={handlePrev}
-                                style={{ width: "30%", display: "block", margin: "0 auto" }}
-                            >
-                                Back
-                            </Button>
-                        )}
-                        <Button variant="success" onClick={handleNext} style={{ width: "30%", display: "block", margin: "0 auto" }}>
-                            {step === totalSteps ? "Submit" : "Next"}
-                        </Button>
-                    </div>
-                </Form>
-            </div>
-        </div>
-    );
+                            );
 };
 
-export default MultiStepForm;
+                            export default MultiStepForm;

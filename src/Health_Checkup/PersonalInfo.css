@@ -59,6 +59,16 @@
   z-index: 0;
 }
 
+/* select fields */
+.small-select {
+  height: 30px; /* Reduce height */
+  font-size: 14px; /* Optional: Make text smaller */
+  padding: 2px 8px; /* Adjust padding */
+  max-width: 80%; /* Adjust width as needed */
+  border: 1px solid rgb(6, 58, 6);
+  box-shadow: rgba(9, 134, 40, 0.2) 0px 2.5px 1px;
+}
+
 
 /* 
 .progress-container {
