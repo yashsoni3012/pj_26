@@ -169,7 +169,7 @@ const AuthPage = () => {
                     {/* Left Side - Login / Signup */}
                     <div
                         className={`col-md-6 p-5 d-flex flex-column justify-content-center 
-                        ${isLogin ? 'bg-white' : 'bg-success text-white'}`}
+                        ${isLogin ? 'bg-white' : 'text-white'}`} style={{backgroundColor:"#4F894F"}}
                     >
                         {isLogin ? (
                             <>
@@ -193,7 +193,7 @@ const AuthPage = () => {
                             <>
                                 <h2 className="fw-bold text-light text-center">Welcome Back!</h2>
                                 <p className="text-center">To keep connected with us, please login with your personal info.</p>
-                                <button className="btn btn-outline-light rounded-pill px-4 py-2 mx-auto" onClick={() => setIsLogin(false)}>SIGN IN</button>
+                                <button className="btn btn-outline-light rounded-pill px-4 py-2 w-50 mx-auto" onClick={() => setIsLogin(true)}>SIGN IN</button>
                             </>
                         )}
 
@@ -203,13 +203,14 @@ const AuthPage = () => {
                     {/* Right Side - Toggle Section */}
                     <div
                         className={`col-md-6 d-flex flex-column justify-content-center align-items-center p-5
-                        ${isLogin ? 'bg-success text-white' : 'bg-white text-dark'}`}
+                        ${isLogin ? ' text-white' : 'bg-white text-dark'}`} style={{backgroundColor:"#4F894F"}}
                     >
                         {isLogin ? (
                             <>
                                 <h2 className="fw-bold">New Here?</h2>
-                                <p className="text-center">Create your free account and enjoy seamless access to <b>PRACHIN JADIBUTI</b></p>
-                                <button className="btn btn-outline-light rounded-pill px-4 py-2 mx-auto" onClick={() => setIsLogin(false)}>SIGN UP</button>
+                                <p className="text-center">Create your free account and enjoy seamless access to<br/> <b>PRACHIN JADIBUTI</b></p>
+                                {/* <button className="btn btn-outline-light rounded-pill px-4 py-2 w-50 mx-auto" onClick={() => setIsLogin(false)}>SIGN UP</button> */}
+                                <button className="btn btn-outline-light rounded-pill px-4 py-2 w-50 mx-auto" onClick={() => setIsLogin(false)}>SIGN UP</button>
                             </>
                         ) : (
                             <>
@@ -227,7 +228,8 @@ const AuthPage = () => {
                                     <div className="mb-3">
                                         <input type="password" className="form-control" placeholder="Enter Your Password" />
                                     </div>
-                                    <button className="btn btn-outline-dark rounded-pill d-flex justify-content-center align-items-center px-4 py-2 mx-auto" onClick={() => setIsLogin(true)}>SIGN UP</button>
+                                    {/* <button className="btn btn-outline-dark rounded-pill d-flex justify-content-center align-items-center px-4 py-2 w-50 mx-auto" onClick={() => setIsLogin(true)}>SIGN UP</button> */}
+                                    <button className="btn btn-outline-dark rounded-pill d-flex justify-content-center align-items-center px-4 py-2 w-50 mx-auto">SIGN UP</button>
 
                                 </form>
                                 {/* Divider with OR */}
