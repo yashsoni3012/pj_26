@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/PJlogo.png";
 
 const Navbar = () => {
+    let userId=localStorage.getItem("userId")
     return (
         <div className="navigationbar">
             <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
@@ -41,7 +42,16 @@ const Navbar = () => {
                     </div>
 
                     <div >
-                        <Link to="/login"><i class="fa-solid fa-user fs-5  me-3" style={{ color: "black" }} /></Link>
+                    {userId ? (
+                        <i className="fa-solid fa-user fs-5 me-3" style={{ color: "black" }} />
+                    ) : (
+                        <Link to="/login">
+                            <i
+                                className="fa-solid fa-user fs-5 me-3"
+                                style={{ color: "black", cursor: "pointer" }}
+                            />
+                        </Link>
+                    )}
                         <Link to="#"><i class="fa-solid fa-cart-shopping fs-5" style={{ color: "black" }}></i></Link>
                     </div>
                 </div>

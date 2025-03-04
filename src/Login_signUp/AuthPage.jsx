@@ -86,6 +86,7 @@ import { auth } from "../firebase";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {getToken,onMessage } from "firebase/messaging";
 import messaging from "../firebase"
+import axios from "axios"
 
 const AuthPage = () => {
 
@@ -113,11 +114,11 @@ const AuthPage = () => {
       const handleGoogleLogin = async () => {
         try {
           const provider = new GoogleAuthProvider();
-          provider.setCustomParameters({
-            prompt: "select_account",
-          });
+          provider.setCustomParameters({ prompt: "select_account" });
+      
           const result = await signInWithPopup(auth, provider);
           const user = result.user;
+          console.log("Google user:", user);
       
           // Check and request notification permission
           const hasPermission = await checkNotificationPermission();
@@ -129,32 +130,35 @@ const AuthPage = () => {
             }).catch((err) => {
               console.error("Failed to get notification token:", err);
             });
-          } else {
-            console.warn("Notification permission not granted or blocked. Proceeding without device token.");
           }
       
           const { displayName, email, uid } = user;
-    
-          // Update localStorage
-          localStorage.setItem("userId", uid);
-          localStorage.setItem("webToken", token || "No Token"); // Handle no token scenario
-          localStorage.setItem(
-            "userToken",
-            JSON.stringify({ email: email, name: displayName})
-          );
+          const formData = { name: displayName, email: email, user_id: uid };
+          console.log("Form data to be sent:", formData);
       
-          // Redirect to homepage
-          navigate("/");
+          // Post data to the backend
+          const response = await axios.post("https://pjayurveda.pythonanywhere.com/user_data/", formData, {
+            headers: { "Content-Type": "application/json" },
+          });
+      
+          if (response.status === 200 || response.status === 201) {
+            localStorage.setItem("userId", uid);
+            localStorage.setItem("webToken", token || "No Token");
+            localStorage.setItem("userToken", JSON.stringify({ email: email, name: displayName }));
+            navigate("/");
+          }
         } catch (error) {
-          console.error("Error during Google login:", error);
+          console.error("Error during Google login or data post:", error);
+          alert("Something went wrong. Please try again.");
         }
       
-        // Listen for incoming notifications
+        // Listen for notifications
         onMessage(messaging, (payload) => {
-          console.log("Message received in foreground: ", payload);
+          console.log("Foreground message received:", payload);
           alert(`Notification: ${payload.notification.title} - ${payload.notification.body}`);
         });
       };
+      
     return (
         
         <div className="container-fluid d-flex align-items-center justify-content-center vh-100">
