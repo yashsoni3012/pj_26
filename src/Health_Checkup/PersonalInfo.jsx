@@ -200,7 +200,7 @@ const MultiStepForm = () => {
                                 label="I confirm that all information provided is correct."
                             /> */}
 
-                            <Container className="p-4 border rounded shadow-sm bg-white">
+                            <Container className="p-4 border rounded shadow-sm bg-white mb-5">
                                 <h4 className="mb-3">Lifestyle & Dietary Information</h4>
 
                                 {/* Dietary Preferences */}
@@ -275,14 +275,7 @@ const MultiStepForm = () => {
                                 </Row>
 
                                 {/* Buttons */}
-                                <Row>
-                                    <Col className="text-start">
-                                        <Button variant="success">Back</Button>
-                                    </Col>
-                                    <Col className="text-end">
-                                        <Button variant="success">Submit</Button>
-                                    </Col>
-                                </Row>
+                                
                             </Container>
                         </>
                     )}
