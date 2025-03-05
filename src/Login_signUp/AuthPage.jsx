@@ -12,6 +12,9 @@ const AuthPage = () => {
 
     const [isLogin, setIsLogin] = useState(true);
     const [loading, setLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
     
     const [formData, setFormData] = useState({
@@ -70,6 +73,41 @@ const AuthPage = () => {
       }
     };
     
+    const handleLogin = async (e) => {
+      e.preventDefault();
+      setLoading(true); // Start loading
+    
+      try {
+        // Fetch user data from API
+        const response = await axios.get("https://pjayurveda.pythonanywhere.com/user_data/");
+        const users = response.data.data; // Ensure this matches your API structure
+    
+        console.log(users); // Debugging: Check API response
+        console.log(email, password); // Debugging: Check entered email and password
+    
+        // Find matching user
+        let user = users.find((user) => user.email === email && user.password === password);
+    
+        if (user) {
+          // Save user data to local storage
+          localStorage.setItem("userToken", JSON.stringify({ email: user.email, name: user.name }));
+          localStorage.setItem("userId", user.user_id);
+          localStorage.setItem("userType", "user");
+          alert(`Welcome, ${user.name}`);
+          navigate("/");
+        } else {
+          setErrorMessage("Invalid email or password.");
+          setTimeout(() => setErrorMessage(""), 3000);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setErrorMessage("Unable to connect to the server. Please try again later.");
+      } finally {
+        setLoading(false); // Ensure loading stops in all cases
+      }
+    };
+    
+
     const checkNotificationPermission = async () => {
         console.log("Current Permission:", Notification.permission);
         const permission = Notification.permission;
@@ -147,12 +185,22 @@ const AuthPage = () => {
                 >
                   {isLogin ? (
                     <>
-                      <form>
+                      <form onSubmit={handleLogin}>
                         <h2 className="text-success text-center fw-bold">Login In</h2>
-                        <input type="email" className="form-control my-3" placeholder="Enter Your Email Id" required/>
-                        <input type="password" className="form-control my-3" placeholder="Enter Your Password" required/>
+                        <input type="email" className="form-control my-3" placeholder="Enter Your Email Id" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                        <input type="password" className="form-control my-3" placeholder="Enter Your Password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
                         <div className="d-flex justify-content-center">
-                          <button className="btn btn-outline-dark rounded-pill px-4 py-2 w-50">SIGN IN</button>
+                          <button
+                          type="submit"
+                          className="btn btn-outline-dark rounded-pill d-flex justify-content-center align-items-center px-4 py-2 w-50 mx-auto"
+                          disabled={loading}
+                          >
+                            {loading ? (
+                              <div className="spinner-border spinner-border-sm text-dark" role="status"></div>
+                            ) : (
+                              "SIGN UP"
+                            )}
+                          </button>
                         </div>
                       </form>
                   
@@ -162,7 +210,7 @@ const AuthPage = () => {
                         <span className="mx-2 text-muted">or</span>
                         <hr className="flex-grow-1 text-dark" style={{ border: "1px solid black" }} />
                       </div>
-                      <div className="text-center" onClick={handleGoogleLogin}>
+                      <div className="text-center" onClick={handleGoogleLogin} style={{cursor:"pointer"}}>
                         <span className="me-2">Continue with Google</span>
                         <i className="fa-brands fa-google google-icon"></i>
                       </div>
@@ -232,7 +280,7 @@ const AuthPage = () => {
                         <span className="mx-2 text-muted">or</span>
                         <hr className="flex-grow-1 text-dark" style={{ border: "1px solid black" }} />
                     </div>
-                    <div className="text-center" onClick={handleGoogleLogin}>
+                    <div className="text-center" onClick={handleGoogleLogin} style={{cursor:"pointer"}}>
                       <span className="me-2">Continue with Google</span>
                       <i className="fa-brands fa-google google-icon"></i>
                     </div>
