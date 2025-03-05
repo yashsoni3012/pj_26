@@ -1,84 +1,4 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import '../Login_signUp/Login.css';
-
-// const AuthPage = () => {
-//     const [isLogin, setIsLogin] = useState(true);
-
-//     return (
-//         <div className="container-fluid d-flex align-items-center justify-content-center vh-100">
-//             <div className="card shadow-lg rounded-4 overflow-hidden auth-container w-75" style={{ minHeight: "60vh" }}>
-//                 <div className="row g-0" style={{ minHeight: "70vh" }}>
-//                     {/* Left Side - Login / Signup */}
-//                     <div className={`col-md-6 p-5 d-flex flex-column justify-content-center ${isLogin ? '' : 'text-white'}`}>
-//                         {isLogin ? (
-//                             <>
-//                                 <h2 className="text-success text-center fw-bold">Login In</h2>
-//                                 <input type="email" className="form-control my-3" placeholder="Enter Your Email Id" />
-//                                 <input type="password" className="form-control my-3" placeholder="Enter Your Password" />
-//                                 <button className="btn btn-outline-dark rounded-pill px-4 py-2 w-50 mx-auto">SIGN IN</button>
-//                             </>
-//                         ) : (
-//                             <>
-//                                 <h2 className="fw-bold text-success">Create Account</h2>
-//                                 <form className="mt-4 w-100">
-//                                     <div className="mb-3">
-//                                         <input type="text" className="form-control" placeholder="Enter Your Name" />
-//                                     </div>
-//                                     <div className="mb-3">
-//                                         <input type="email" className="form-control" placeholder="Enter Your Email ID" />
-//                                     </div>
-//                                     <div className="mb-3">
-//                                         <input type="text" className="form-control" placeholder="Enter Your Mobile No." />
-//                                     </div>
-//                                     <div className="mb-3">
-//                                         <input type="password" className="form-control" placeholder="Enter Your Password" />
-//                                     </div>
-//                                 </form>
-//                             </>
-//                         )}
-
-//                         {/* Divider with OR */}
-//                         <div className="d-flex align-items-center my-3">
-//                             <hr className="flex-grow-1 text-dark" />
-//                             <span className="mx-2 text-muted">or</span>
-//                             <hr className="flex-grow-1 text-dark" />
-//                         </div>
-//                         <div className="text-center">
-//                             <span className="me-2">Continue with Google</span>
-//                             <i className="fa-brands fa-google google-icon"></i>
-//                         </div>
-//                     </div>
-                    
-//                     {/* Right Side - Toggle Section */}
-//                     <div className="col-md-6 text-white d-flex flex-column justify-content-center align-items-center p-5 login-right">
-//                         {isLogin ? (
-//                             <>
-//                                 <h2 className="fw-bold">New Here?</h2>
-//                                 <p className="text-center">Create your free account and enjoy seamless access to <b>PRACHIN JADIBUTI</b></p>
-//                                 <Link to="/signup" className="rounded-pill" onClick={() => setIsLogin(false)}>
-//                                     <button className="btn btn-outline-light rounded-pill px-4 py-2 mx-auto">SIGN UP</button>
-//                                 </Link>
-//                             </>
-//                         ) : (
-//                             <>
-//                                 <h2 className="text-light text-center fw-bold">Welcome Back!</h2>
-//                                 <p className="text-light text-center">To keep connected with us please login with your personal info.</p>
-//                                 <Link to="/login" className="rounded-pill" onClick={() => setIsLogin(true)}>
-//                                     <button className="btn btn-outline-light rounded-pill px-4 py-2 mx-auto">SIGN IN</button>
-//                                 </Link>
-//                             </>
-//                         )}
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default AuthPage;
-
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import '../Login_signUp/Login.css';
 import { useNavigate } from "react-router-dom";
@@ -91,7 +11,64 @@ import axios from "axios"
 const AuthPage = () => {
 
     const [isLogin, setIsLogin] = useState(true);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    
+    const [formData, setFormData] = useState({
+      name: "",
+      email: "",
+      mobile: "",
+      password: "",
+    });
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault(); // Prevent default form submission behavior
+      setLoading(true); // Start the loader
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      const userId = Array.from({ length: 10 }, () => characters[Math.floor(Math.random() * characters.length)]).join("");
+  
+      const apiUrl = "https://pjayurveda.pythonanywhere.com/user_data/";
+  
+      try {
+        // Include user_id in the payload
+        const payload = {
+          ...formData,
+          user_id: userId,
+        };
+
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+          user_id:userId
+        });
+  
+        if (response.status === 200 || response.status === 201) {
+          alert("Data submitted successfully!");
+          localStorage.setItem("userId", userId);
+          localStorage.setItem("userToken", JSON.stringify({ email: formData.email, name: formData.name }));
+          setFormData({ name: "", email: "", mobile: "", password: "" });
+          navigate("/")
+        } else {
+          const errorData = await response.json();
+          alert(`Error: ${errorData.message || "Failed to submit data"}`);
+        }
+      } catch (error) {
+        alert(`Error: ${error.message}`);
+      }finally {
+        setLoading(false); // Stop the loader
+      }
+    };
     
     const checkNotificationPermission = async () => {
         console.log("Current Permission:", Notification.permission);
@@ -159,76 +136,112 @@ const AuthPage = () => {
         });
       };
       
-    return (
-        
+      return (
         <div className="container-fluid d-flex align-items-center justify-content-center vh-100">
-            <div className="card shadow-lg rounded-4 overflow-hidden auth-container w-75" style={{ minHeight: "60vh" }}>
-                <div className="row g-0" style={{ minHeight: "70vh" }}>
-                    {/* Left Side - Login / Signup */}
-                    <div className={`col-md-6 p-5 d-flex flex-column justify-content-center ${isLogin ? '' : 'text-white'}`}>
-                        {isLogin ? (
-                            <>
-                                <h2 className="text-success text-center fw-bold">Login In</h2>
-                                <input type="email" className="form-control my-3" placeholder="Enter Your Email Id" />
-                                <input type="password" className="form-control my-3" placeholder="Enter Your Password" />
-                                <button className="btn btn-outline-dark rounded-pill px-4 py-2 w-50 mx-auto">SIGN IN</button>
-                            </>
-                        ) : (
-                            <>
-                                <h2 className="fw-bold text-success">Create Account</h2>
-                                <form className="mt-4 w-100">
-                                    <div className="mb-3">
-                                        <input type="text" className="form-control" placeholder="Enter Your Name" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <input type="email" className="form-control" placeholder="Enter Your Email ID" />
-                                    </div>
-                                    <div className="mb-3">
-                                        <input type="text" className="form-control" placeholder="Enter Your Mobile No." />
-                                    </div>
-                                    <div className="mb-3">
-                                        <input type="password" className="form-control" placeholder="Enter Your Password" />
-                                    </div>
-                                </form>
-                            </>
-                        )}
-
-                        {/* Divider with OR */}
-                        <div className="d-flex align-items-center my-3">
-                            <hr className="flex-grow-1 text-dark" />
-                            <span className="mx-2 text-muted">or</span>
-                            <hr className="flex-grow-1 text-dark" />
+          <div className="card shadow-lg rounded-4 overflow-hidden auth-container w-75" style={{ minHeight: "60vh" }}>
+            <div className="row g-0" style={{ minHeight: "70vh" }}>
+                {/* Left Side - Login / Signup */}
+                <div
+                  className={`col-md-6 p-5 d-flex flex-column justify-content-center ${isLogin ? 'bg-white' : 'text-white'}`}
+                  style={{ backgroundColor: "#4F894F" }}
+                >
+                  {isLogin ? (
+                    <>
+                      <form>
+                        <h2 className="text-success text-center fw-bold">Login In</h2>
+                        <input type="email" className="form-control my-3" placeholder="Enter Your Email Id" required/>
+                        <input type="password" className="form-control my-3" placeholder="Enter Your Password" required/>
+                        <div className="d-flex justify-content-center">
+                          <button className="btn btn-outline-dark rounded-pill px-4 py-2 w-50">SIGN IN</button>
                         </div>
-                        <div className="text-center" onClick={handleGoogleLogin}>
-                            <span className="me-2 text-success">Continue with Google</span>
-                            <i className="fa-brands fa-google google-icon"></i>
-                        </div>
-                    </div>
-                    
-                    {/* Right Side - Toggle Section */}
-                    <div className="col-md-6 text-white d-flex flex-column justify-content-center align-items-center p-5 login-right">
-                        {isLogin ? (
-                            <>
-                                <h2 className="fw-bold">New Here?</h2>
-                                <p className="text-center">Create your free account and enjoy seamless access to <b>PRACHIN JADIBUTI</b></p>
-                                <Link to="/signup" className="rounded-pill" onClick={() => setIsLogin(false)}>
-                                    <button className="btn btn-outline-light rounded-pill px-4 py-2 mx-auto">SIGN UP</button>
-                                </Link>
-                            </>
+                      </form>
+                  
+                      {/* Divider with OR */}
+                      <div className="d-flex align-items-center my-3">
+                        <hr className="flex-grow-1 text-dark" />
+                        <span className="mx-2 text-muted">or</span>
+                        <hr className="flex-grow-1 text-dark" style={{ border: "1px solid black" }} />
+                      </div>
+                      <div className="text-center" onClick={handleGoogleLogin}>
+                        <span className="me-2">Continue with Google</span>
+                        <i className="fa-brands fa-google google-icon"></i>
+                      </div>
+                    </>
                         ) : (
-                            <>
-                                <h2 className="text-light text-center fw-bold">Welcome Back!</h2>
-                                <p className="text-light text-center">To keep connected with us please login with your personal info.</p>
-                                <Link to="/login" className="rounded-pill" onClick={() => setIsLogin(true)}>
-                                    <button className="btn btn-outline-light rounded-pill px-4 py-2 mx-auto">SIGN IN</button>
-                                </Link>
-                            </>
+                    <>
+                      <h2 className="fw-bold text-light text-center">Welcome Back!</h2>
+                      <p className="text-center">To keep connected with us, please login with your personal info.</p>
+                      <button
+                        className="btn btn-outline-light rounded-pill px-4 py-2 w-50 mx-auto"
+                        onClick={() => setIsLogin(true)}
+                      >
+                        SIGN IN
+                      </button>
+                    </>
                         )}
-                    </div>
                 </div>
+
+                {/* Right Side - Toggle Section */}
+                <div
+                  className={`col-md-6 d-flex flex-column justify-content-center align-items-center p-5 ${isLogin ? 'text-white' : 'bg-white text-dark'}`}
+                  style={{ backgroundColor: "#4F894F" }}
+                >
+                  {isLogin ? (
+                  <>
+                    <h2 className="fw-bold">New Here?</h2>
+                    <p className="text-center">Create your free account and enjoy seamless access to<br /> <b>PRACHIN JADIBUTI</b></p>
+                    <button
+                      className="btn btn-outline-light rounded-pill px-4 py-2 w-50 mx-auto"
+                      onClick={() => setIsLogin(false)}
+                    >
+                      SIGN UP
+                    </button>
+                  </>
+                        ) : (
+                  <>
+                    <h2 className="fw-bold text-success">Create Account</h2>
+                    <form className="mt-4 w-100" onSubmit={handleSubmit}>
+                      <div className="mb-3">
+                        <input type="text" name="name" className="form-control" placeholder="Enter Your Name" value={formData.name} onChange={handleChange} required />
+                      </div>
+                      <div className="mb-3">
+                        <input type="email" name="email" className="form-control" placeholder="Enter Your Email ID" value={formData.email} onChange={handleChange} required/>
+                      </div>
+                      <div className="mb-3">
+                        <input type="text" name="mobile" className="form-control" placeholder="Enter Your Mobile No." value={formData.mobile} onChange={handleChange} required />
+                      </div>
+                      <div className="mb-3">
+                        <input type="password" name="password" className="form-control" placeholder="Enter Password" value={formData.password} onChange={handleChange} required />
+                      </div>
+                      <button
+                        type="submit"
+                        className="btn btn-outline-dark rounded-pill d-flex justify-content-center align-items-center px-4 py-2 w-50 mx-auto"
+                        disabled={loading}
+                      >
+                        {loading ? (
+                          <div className="spinner-border spinner-border-sm text-dark" role="status"></div>
+                        ) : (
+                          "SIGN UP"
+                        )}
+                      </button>
+                    </form>
+
+                    {/* Divider with OR */}
+                    <div className="d-flex align-items-center my-3">
+                        <hr className="flex-grow-1 text-dark" />
+                        <span className="mx-2 text-muted">or</span>
+                        <hr className="flex-grow-1 text-dark" style={{ border: "1px solid black" }} />
+                    </div>
+                    <div className="text-center" onClick={handleGoogleLogin}>
+                      <span className="me-2">Continue with Google</span>
+                      <i className="fa-brands fa-google google-icon"></i>
+                    </div>
+                  </>
+                  )}
             </div>
+          </div>
         </div>
+      </div>
     );
 };
-
 export default AuthPage;
