@@ -58,18 +58,48 @@
   background-color: #f2f2f2;
   z-index: 0;
 }
-
+.personalInfoInput{
+  box-shadow: rgba(1, 16, 4, 0.2) 0px 2px 1px;
+}
 /* select fields */
 .small-select {
   height: 30px; /* Reduce height */
-  font-size: 14px; /* Optional: Make text smaller */
+  font-size: 15px; /* Optional: Make text smaller */
   padding: 2px 8px; /* Adjust padding */
   max-width: 80%; /* Adjust width as needed */
   border: 1px solid rgb(6, 58, 6);
-  box-shadow: rgba(9, 134, 40, 0.2) 0px 2.5px 1px;
+  box-shadow: rgba(1, 16, 4, 0.2) 0px 3px 1px;
 }
 
+.medicalTextArea{
+  width: 100%;
+  margin: 5px 0;
+  border: 1px solid #2E7D32;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.medicalInput textarea{
+  height: 60%;
+}
 
+.upload-box {
+  border: 2px dashed #4CAF50;
+  border-radius: 10px;
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  transition: border-color 0.3s ease-in-out;
+}
+.upload-box:hover {
+  border-color: #2E7D32;
+}
+.upload-box i {
+  font-size: 40px;
+  color: #4CAF50;
+}
+.upload-box input[type="file"] {
+  display: none;
+}
 /* 
 .progress-container {
     width: 100%;
