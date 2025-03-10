@@ -58,9 +58,22 @@
   background-color: #f2f2f2;
   z-index: 0;
 }
-.personalInfoInput{
-  box-shadow: rgba(1, 16, 4, 0.2) 0px 2px 1px;
+.infoInput{
+  /* box-shadow: rgba(1, 16, 4, 0.2) 0px 2px 1px; */
+  height: 30px; /* Reduce height */
+  font-size: 15px; /* Optional: Make text smaller */
+  padding: 2px 8px; /* Adjust padding */
+  max-width: 80%; /* Adjust width as needed */
+  border: 1px solid rgb(6, 58, 6);
+  box-shadow: rgba(1, 16, 4, 0.2) 0px 3px 1px;
 }
+.infoInput:focus, 
+.infoInput:active {
+    outline: none !important;  /* Removes default outline */
+    box-shadow: none !important; /* Removes Bootstrap focus glow */
+    border-color: #4F894F !important; /* Optional: Change to your preferred border color */
+}
+
 /* select fields */
 .small-select {
   height: 30px; /* Reduce height */
@@ -70,7 +83,12 @@
   border: 1px solid rgb(6, 58, 6);
   box-shadow: rgba(1, 16, 4, 0.2) 0px 3px 1px;
 }
-
+.small-select:focus, 
+.small-select:active {
+    /* Removes default outline */
+    box-shadow: none !important; /* Removes Bootstrap focus glow */
+    border-color: #4F894F !important; /* Optional: Change to your preferred border color */
+}
 .medicalTextArea{
   width: 100%;
   margin: 5px 0;
@@ -81,7 +99,12 @@
 .medicalInput textarea{
   height: 60%;
 }
-
+.medicalTextArea:focus,
+.medicalTextArea:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #4F894F !important;
+}
 .upload-box {
   border: 2px dashed #4CAF50;
   border-radius: 10px;

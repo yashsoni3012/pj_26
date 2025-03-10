@@ -19,3 +19,71 @@
     background-color: #4F894F ;
 }
 
+
+.container-fluid {
+    background-color: #f0f2f5;
+}
+
+.auth-container {
+    width: 75%;
+    min-height: 60vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-container .row {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Left Section (Form) */
+.auth-container .col-md-6:first-child {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Right Section (Toggle Panel) */
+.auth-container .col-md-6:last-child {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* Sign-up Active State */
+.signup-active .row {
+    transform: translateX(-100%);
+}
+
+/* Smooth Button Hover */
+.btn {
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* Divider Styling */
+.d-flex.align-items-center.my-3 {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.d-flex.align-items-center.my-3 span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0 10px;
+}
+
+/* Google Icon */
+.google-icon {
+    font-size: 20px;
+    color: black;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.google-icon:hover {
+    transform: scale(1.2);
+}

@@ -254,3 +254,113 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
+
+// import React, { useState } from "react";
+// import { motion } from "framer-motion";
+// import '../Login_signUp/Login.css';
+
+// const AuthPage = () => {
+//     const [isLogin, setIsLogin] = useState(true);
+
+//     return (
+//         <div className="container-fluid d-flex align-items-center justify-content-center vh-100">
+//             <div className="card shadow-sm rounded-4 overflow-hidden auth-container w-75" style={{ minHeight: "60vh" }}>
+//                 <div className="row g-0" style={{ minHeight: "70vh" }}>
+
+//                     {/* Left Side - Login / Signup */}
+//                     <div className="col-md-6 p-5 d-flex flex-column justify-content-center" style={{ backgroundColor: "white", color: isLogin ? "black" : "white" }}>
+//                         <motion.div
+//                             key={isLogin ? "login" : "signup"}
+//                             initial={{ opacity: 0, x: 50 }}
+//                             animate={{ opacity: 1, x: 0 }}
+//                             exit={{ opacity: 0, x: -50 }}
+//                             transition={{ duration: 0.4, ease: "easeInOut" }}
+//                         >
+//                             {isLogin ? (
+//                                 <>
+//                                     <h2 className="text-success text-center fw-bold">Login In</h2>
+//                                     <input type="email" className="form-control my-3" placeholder="Enter Your Email Id" />
+//                                     <input type="password" className="form-control my-3" placeholder="Enter Your Password" />
+//                                     <button className="btn btn-outline-dark rounded-pill d-flex justify-content-center align-items-center text-center px-4 py-2 w-50 mx-auto">SIGN IN</button>
+
+//                                     {/* Divider with OR */}
+//                                     <div className="d-flex align-items-center my-3">
+//                                         <hr className="flex-grow-1 text-dark" />
+//                                         <span className="text-muted">or</span>
+//                                         <hr className="flex-grow-1 text-dark ms-5" />
+//                                     </div>
+//                                     <div className="text-center">
+//                                         <span className="me-2">Continue with Google</span>
+//                                         <i className="fa-brands fa-google google-icon"></i>
+//                                     </div>
+
+
+//                                 </>
+//                             ) : (
+//                                 <>
+//                                     <div>
+//                                         <h2 className="fw-bold text-light text-center">Welcome Back!</h2>
+//                                         <p className="text-center">To keep connected with us, please login with your personal info.</p>
+//                                         <button className="btn btn-outline-light rounded-pill px-4 py-2 w-50 mx-auto d-flex text-center justify-content-center align-items-center" onClick={() => setIsLogin(true)}>SIGN IN</button>
+//                                     </div>
+//                                 </>
+//                             )}
+//                         </motion.div>
+//                     </div>
+
+//                     {/* Right Side - Toggle Section */}
+//                     <div className="col-md-6 d-flex flex-column justify-content-center align-items-center p-5" style={{ backgroundColor: "#4F894F", color: isLogin ? "white" : "black" }}>
+//                         <motion.div
+//                             key={isLogin ? "signup-text" : "signin-text"}
+//                             initial={{ opacity: 0, y: 20 }}
+//                             animate={{ opacity: 1, y: 0 }}
+//                             exit={{ opacity: 0, y: -20 }}
+//                             transition={{ duration: 0.4, ease: "easeInOut" }}
+//                         >
+//                             {isLogin ? (
+//                                 <>
+//                                     <h2 className="fw-bold text-center">New Here?</h2>
+//                                     <p className="text-center">Create your free account and enjoy seamless access to <br /> <b>PRACHIN JADIBUTI</b></p>
+//                                     <button className="btn btn-outline-light rounded-pill d-flex text-center justify-content-center align-items-center px-4 py-2 w-50 mx-auto" onClick={() => setIsLogin(false)}>SIGN UP</button>
+//                                 </>
+//                             ) : (
+//                                 <>
+//                                     <h2 className="fw-bold text-success">Create Account</h2>
+//                                     <form className="mt-4 w-100">
+//                                         <div className="mb-3">
+//                                             <input type="text" className="form-control" placeholder="Enter Your Name" />
+//                                         </div>
+//                                         <div className="mb-3">
+//                                             <input type="email" className="form-control" placeholder="Enter Your Email ID" />
+//                                         </div>
+//                                         <div className="mb-3">
+//                                             <input type="text" className="form-control" placeholder="Enter Your Mobile No." />
+//                                         </div>
+//                                         <div className="mb-3">
+//                                             <input type="password" className="form-control" placeholder="Enter Your Password" />
+//                                         </div>
+//                                         <button className="btn btn-outline-dark rounded-pill d-flex justify-content-center align-items-center text-center px-4 py-2 w-100 mx-auto">SIGN UP</button>
+//                                     </form>
+
+//                                     {/* Divider with OR */}
+//                                     <div className="d-flex align-items-center my-3">
+//                                         <hr className="flex-grow-1 text-dark" />
+//                                         <span className="mx-2 text-muted">or</span>
+//                                         <hr className="flex-grow-1 text-dark" style={{ border: "1px solid black" }} />
+//                                     </div>
+//                                     <div className="text-center">
+//                                         <span className="me-2">Continue with Google</span>
+//                                         <i className="fa-brands fa-google google-icon"></i>
+//                                     </div>
+//                                 </>
+//                             )}
+//                         </motion.div>
+//                     </div>
+
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default AuthPage;

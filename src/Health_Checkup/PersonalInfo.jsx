@@ -1,6 +1,14 @@
-import React, { useState } from "react";
-import { Form, Button, ProgressBar, Container, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import {
+    Form,
+    Button,
+    ProgressBar,
+    Container,
+    Row,
+    Col,
+} from "react-bootstrap";
 import "../Health_Checkup/PersonalInfo.css";
+import axios from "axios";
 
 const MultiStepForm = () => {
     const [step, setStep] = useState(1);
@@ -11,17 +19,63 @@ const MultiStepForm = () => {
         setStep((prev) => (prev < totalSteps ? prev + 1 : prev));
     const handlePrev = () => setStep((prev) => (prev > 1 ? prev - 1 : prev));
 
+    // new optionsCheckbox
+
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    const options = ["Diabetes", "Thyroid", "Constipation & Gas", "Joint Pain"];
+    const handleCheckboxChange = (option) => {
+        setSelectedOptions((prev) =>
+            prev.includes(option)
+                ? prev.filter((item) => item !== option)
+                : [...prev, option]
+        );
+    };
+    // fetching data from API
+
+    const [data, setData] = useState([]);
+    const API =
+        "https://pjayurveda.pythonanywhere.com/user_data/Yash123/";
+
+    const getData = async () => {
+        try {
+            const res = await axios.get(API)
+            console.log(res.data)
+            setData(res.data)
+        }
+        catch (err) {
+            console.log(err)
+        }
+    };
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+
+
     return (
         <div className="container my-5">
             <div className="card shadow-lg p-4 rounded-4">
                 {/* Step Indicator */}
                 <div className="progress-container" style={{ width: "100%" }}>
-                    <div className="progress-bar-custom" style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
+                    <div
+                        className="progress-bar-custom"
+                        style={{
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
                         {[1, 2, 3].map((num) => (
                             <div key={num} className="step">
-                                <div className={`circle ${step >= num ? "active" : ""}`}>{num}</div>
+                                <div className={`circle ${step >= num ? "active" : ""}`}>
+                                    {num}
+                                </div>
                                 {num !== 3 && (
-                                    <div className={`line ${step > num ? "filled" : step === num ? "partial" : ""}`} />
+                                    <div
+                                        className={`line ${step > num ? "filled" : step === num ? "partial" : ""
+                                            }`}
+                                    />
                                 )}
                             </div>
                         ))}
@@ -32,44 +86,62 @@ const MultiStepForm = () => {
                 <Form>
                     {step === 1 && (
                         <>
-                            <h4><b>Personal Information</b></h4>
-                            <div className="row">
-                                <div className="col-md-6 mb-3">
-                                    <Form.Control type="text" placeholder="Full Name" className="personalInfoInput" />
+                            {/* <div>
+                                <h4><b>Personal Information</b></h4>
+                                <div className="row">
+                                    <div className="col-md-6 mb-3">
+                                        <Form.Control type="text" placeholder="Full Name" className="infoInput" />
+                                    </div>
+                                    <div className="col-md-6 mb-3">
+                                        <Form.Control type="email" placeholder="Email Address" className="infoInput" />
+                                    </div>
+                                    <div className="col-md-4 mb-3">
+                                        <Form.Control type="text" placeholder="Phone Number" className="infoInput" />
+                                    </div>
+                                    <div className="col-md-4 mb-3">
+                                        <Form.Control type="number" placeholder="Age" className="infoInput" />
+                                    </div>
+                                    <div className="col-md-4 mb-3">
+                                        <Form.Control type="text" placeholder="Weight (kg)" className="infoInput" />
+                                    </div>
+                                    <div className="col-md-6 mb-3">
+                                        <Form.Select className="infoInput">
+                                            <option>Select Gender</option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </Form.Select>
+                                    </div>
+                                    <div className="col-md-6 mb-3">
+                                        <Form.Control type="text" placeholder="Blood Group" className="infoInput" />
+                                    </div>
+                                    <div className="col-md-6 mb-3">
+                                        <Form.Control type="text" placeholder="Address" className="infoInput" />
+                                    </div>
+                                    <div className="col-md-6 mb-3">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Any existing health condition?"
+                                            className="infoInput"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="col-md-6 mb-3">
-                                    <Form.Control type="email" placeholder="Email Address" className="personalInfoInput" />
-                                </div>
-                                <div className="col-md-4 mb-3">
-                                    <Form.Control type="text" placeholder="Phone Number" className="personalInfoInput" />
-                                </div>
-                                <div className="col-md-4 mb-3">
-                                    <Form.Control type="number" placeholder="Age" className="personalInfoInput" />
-                                </div>
-                                <div className="col-md-4 mb-3">
-                                    <Form.Control type="text" placeholder="Weight (kg)" className="personalInfoInput" />
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <Form.Select className="personalInfoInput">
-                                        <option>Select Gender</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                    </Form.Select>
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <Form.Control type="text" placeholder="Blood Group" className="personalInfoInput" />
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <Form.Control type="text" placeholder="Address" className="personalInfoInput" />
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <Form.Control
-                                        type="text"
-                                        placeholder="Any existing health condition?"
-                                        className="personalInfoInput"
-                                    />
-                                </div>
-                            </div>
+                            </div> */}
+                            <h4 className="fw-bold">Personal Information</h4>
+                            {
+                                data.map((item) => {
+                                    return (
+                                        // <h1 key={item.user_id} >{item.user_id}</h1>
+                                        // <h1 key={item.user_id}>{item.name}</h1> 
+                                        <div key={item.user_id}>
+                                            <h1>{item.user_id}</h1>
+                                        </div>
+                                    )
+                                })
+                            }
+
+
+
+
                         </>
                     )}
 
@@ -77,18 +149,42 @@ const MultiStepForm = () => {
                         <>
                             <h4 className="fw-bold">Medical Information</h4>
                             <Row className="mt-4">
-                                <Col xs={6} sm={4} md={3}> {/* Controls width */}
-                                    <Form.Group controlId="sufferingFrom" className="mb-3 small-dropdown">
+                                <Col xs={6} sm={4} md={3}>
+                                    <Form.Group
+                                        controlId="sufferingFrom"
+                                        className="mb-3 small-dropdown"
+                                    >
                                         <Form.Select className="small-select">
-                                            <option>Seffering From</option>
+                                            <option>Suffering From</option>
                                             <option>Diabetes</option>
                                             <option>Hypertension</option>
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
+
+                                {/* <Dropdown className="mt-4">
+                                    <Dropdown.Toggle variant="outline-success" id="dropdown-basic">
+                                        Suffering From
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        {options.map((option, index) => (
+                                            <Dropdown.Item key={index} as="div">
+                                                <Form.Check
+                                                    type="checkbox"
+                                                    label={option}
+                                                    checked={selectedOptions.includes(option)}
+                                                    onChange={() => handleCheckboxChange(option)}
+                                                />
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown> */}
                             </Row>
 
-                            <h5 className="mb-3 fw-bold">Health Parameters for Diabetes Patients</h5>
+                            <h5 className="mb-3 fw-bold">
+                                Health Parameters for Diabetes Patients
+                            </h5>
 
                             <Row className="mb-4">
                                 <Col xs={12} sm={6} md={6} lg={6}>
@@ -100,6 +196,7 @@ const MultiStepForm = () => {
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
+
                                 <Col xs={12} sm={6} md={6} lg={6}>
                                     <Form.Group className="mb-3">
                                         <Form.Select className="small-select">
@@ -137,7 +234,9 @@ const MultiStepForm = () => {
                                 <Col xs={12} sm={6} md={6} lg={6}>
                                     <Form.Group className="mb-5">
                                         <Form.Select className="small-select">
-                                            <option>Associated Health Conditions (Co-morbidities)</option>
+                                            <option>
+                                                Associated Health Conditions (Co-morbidities)
+                                            </option>
                                         </Form.Select>
                                     </Form.Group>
                                 </Col>
@@ -145,34 +244,47 @@ const MultiStepForm = () => {
 
                             <Row>
                                 <Col xs={12} sm={12} md={6} lg={6} className="mb-3">
-                                    <Form.Group controlId="additionalInfo" className="mb-3 mt-2 medicalTextArea">
-                                        <Form.Control as="textarea" rows={7} placeholder="Describe your symptoms, health concerns, or any ongoing treatments..." />
+                                    <Form.Group
+                                        controlId="additionalInfo"
+                                        className="mb-3 mt-2 medicalTextArea"
+                                    >
+                                        <Form.Control
+                                            as="textarea"
+                                            rows={7}
+                                            placeholder="Describe your symptoms, health concerns, or any ongoing treatments..."
+                                        />
                                     </Form.Group>
                                 </Col>
 
                                 <Col xs={12} sm={12} md={6} lg={6}>
-                                    <Form.Group controlId="fileUpload" className="mb-3 mt-2 p-0 text-center">
+                                    <Form.Group
+                                        controlId="fileUpload"
+                                        className="mb-3 mt-2 p-0 text-center"
+                                    >
                                         {/* <Form.Label>Upload your report (PDF, up to 50MB)</Form.Label>
                                         <Form.Control type="file" accept=".pdf" style={{maxWidth:"80%"}}/> */}
                                         <div class="container d-flex justify-content-center align-items-center vh-50">
                                             <div class="col-md-6">
                                                 <div class="upload-box" id="dropZone">
                                                     <i class="fa-solid fa-cloud-arrow-up text-dark"></i>
-                                                    <p class="mt-2">Upload your report or drag & drop it here</p>
-                                                    <small class="text-muted">Only PDF formats, up to 50MB</small>
+                                                    <p class="mt-2">
+                                                        Upload your report or drag & drop it here
+                                                    </p>
+                                                    <small class="text-muted">
+                                                        Only PDF formats, up to 50MB
+                                                    </small>
                                                     <br />
-                                                    <label class="btn btn-outline-dark mt-2">
-                                                        Browse File <input type="file" id="fileInput" accept=".pdf" />
+                                                    <label className="btn btn-outline-dark mt-2">
+                                                        Browse File{" "}
+                                                        <input type="file" id="fileInput" accept=".pdf" />
                                                     </label>
                                                     <p id="fileName" class="mt-2 text-muted"></p>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </Form.Group>
                                 </Col>
                             </Row>
-
 
                             {/* <div className="row">
                                 <div className="col-md-6 mb-3">
@@ -200,16 +312,30 @@ const MultiStepForm = () => {
                                 label="I confirm that all information provided is correct."
                             /> */}
 
-                            <Container className="p-4 border rounded shadow-sm bg-white mb-5">
-                                <h4 className="mb-3">Lifestyle & Dietary Information</h4>
+                            <Container className="p-4 rounded bg-white mb-5">
+                                <h4 className="mb-3 fw-bold">
+                                    Lifestyle & Dietary Information
+                                </h4>
 
                                 {/* Dietary Preferences */}
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Dietary Preferences</Form.Label>
+                                    <Form.Label>
+                                        <h5 className="fw-bold">Dietary Preferences</h5>
+                                    </Form.Label>
                                     <Row>
                                         {["Vegetarian", "Vegan", "Non-Vegetarian"].map((item) => (
-                                            <Col key={item} xs={4} className="mb-2">
-                                                <Button variant="outline-success" className="w-100">
+                                            <Col
+                                                key={item}
+                                                xs={4}
+                                                sm={12}
+                                                md={4}
+                                                lg={4}
+                                                className="mb-2"
+                                            >
+                                                <Button
+                                                    variant="outline-success"
+                                                    className="w-100 infoInput"
+                                                >
                                                     🥦 {item}
                                                 </Button>
                                             </Col>
@@ -218,8 +344,8 @@ const MultiStepForm = () => {
                                 </Form.Group>
 
                                 {/* Allergies */}
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Allergies</Form.Label>
+                                {/* <Form.Group className="mb-3">
+                                    <Form.Label className="fw-bold">Allergies</Form.Label>
                                     <Row>
                                         {["Dairy", "Nuts", "Soy", "Gluten", "Shellfish"].map((item) => (
                                             <Col key={item} xs={4} md={2} className="mb-2">
@@ -229,15 +355,46 @@ const MultiStepForm = () => {
                                             </Col>
                                         ))}
                                     </Row>
+                                </Form.Group> */}
+
+                                <Form.Group className="mb-3">
+                                    <Form.Label className="fw-bold">Allergies</Form.Label>
+                                    <Row className="g-2 flex-nowrap">
+                                        {" "}
+                                        {/* Prevent wrapping */}
+                                        {["Dairy", "Nuts", "Soy", "Gluten", "Shellfish"].map(
+                                            (item) => (
+                                                <Col key={item} xs={true}>
+                                                    {" "}
+                                                    {/* Equal width for all columns */}
+                                                    <Button
+                                                        variant="outline-success"
+                                                        className="w-100 infoInput"
+                                                    >
+                                                        ⚠ {item}
+                                                    </Button>
+                                                </Col>
+                                            )
+                                        )}
+                                    </Row>
                                 </Form.Group>
 
                                 {/* Exercise Level */}
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Exercise Level</Form.Label>
-                                    <Row>
-                                        {["Sedentary", "Light", "Moderate", "Active", "Very Active"].map((item) => (
-                                            <Col key={item} xs={4} md={2} className="mb-2">
-                                                <Button variant="outline-success" className="w-100">
+                                    <Form.Label className="fw-bold">Exercise Level</Form.Label>
+                                    <Row className="g-2 flex-nowrap">
+                                        {[
+                                            "Sedentary",
+                                            "Light",
+                                            "Moderate",
+                                            "Active",
+                                            "Very Active",
+                                        ].map((item) => (
+                                            <Col key={item} xs={true} className="mb-2">
+                                                <Button
+                                                    variant="outline-success"
+                                                    className="w-100 infoInput"
+                                                >
                                                     🏃 {item}
                                                 </Button>
                                             </Col>
@@ -249,12 +406,19 @@ const MultiStepForm = () => {
                                 <Row className="mb-3">
                                     <Col md={6}>
                                         <Form.Group>
-                                            <Form.Label>Average Sleep Hours</Form.Label>
-                                            <Form.Select>
+                                            <Form.Label className="fw-bold">
+                                                Average Sleep Hours
+                                            </Form.Label>
+                                            <Form.Select
+                                                style={{ border: "1px solid green" }}
+                                                className="infoInput"
+                                            >
                                                 <option>Select hours</option>
-                                                {["Less than 4", "4-6", "6-8", "More than 8"].map((item) => (
-                                                    <option key={item}>{item}</option>
-                                                ))}
+                                                {["Less than 4", "4-6", "6-8", "More than 8"].map(
+                                                    (item) => (
+                                                        <option key={item}>{item}</option>
+                                                    )
+                                                )}
                                             </Form.Select>
                                         </Form.Group>
                                     </Col>
@@ -264,7 +428,10 @@ const MultiStepForm = () => {
                                             <Row>
                                                 {["Low", "Medium", "High"].map((item) => (
                                                     <Col key={item} xs={4} className="mb-2">
-                                                        <Button variant="outline-success" className="w-100">
+                                                        <Button
+                                                            variant="outline-success"
+                                                            className="w-100 infoInput"
+                                                        >
                                                             ⚖ {item}
                                                         </Button>
                                                     </Col>
@@ -275,7 +442,6 @@ const MultiStepForm = () => {
                                 </Row>
 
                                 {/* Buttons */}
-                                
                             </Container>
                         </>
                     )}
@@ -292,7 +458,11 @@ const MultiStepForm = () => {
                                 Back
                             </Button>
                         )}
-                        <Button variant="success" onClick={handleNext} style={{ width: "30%", display: "block", margin: "0 auto" }}>
+                        <Button
+                            variant="success"
+                            onClick={handleNext}
+                            style={{ width: "30%", display: "block", margin: "0 auto" }}
+                        >
                             {step === totalSteps ? "Submit" : "Next"}
                         </Button>
                     </div>
@@ -303,3 +473,28 @@ const MultiStepForm = () => {
 };
 
 export default MultiStepForm;
+
+// API FORMAT
+
+// {
+
+//     "user_id": "Yash123",
+//     "name": "YashRanpura",
+//     "email": "yashranpura3@gmail.com",
+//     "password": "123@abc",
+//     "age": 23,
+//     "mobile": 9737126164,
+//     "weight": 60,
+//     "gender": "male",
+//     "blood_group": "O+",
+//     "address": "maxgen1",
+//     "any_existing_health_condition": "yes",
+//     "medicine_name": "paracetamoll",
+//     "dosage": "morningg",
+
+//     "dietary_preferences": "vegann",
+//     "allergies": "yes",
+//     "exercise_level": "lightt",
+//     "average_sleep_hours": "8",
+//     "stress_level": "high"
+// }

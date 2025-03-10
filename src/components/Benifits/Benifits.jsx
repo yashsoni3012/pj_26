@@ -58,7 +58,7 @@ import React from 'react';
 import '../Benifits/Benifits.css';
 import centerImage from '../../assets/benifitImg.jpg'; // Replace with your actual image
 import leafIcon from '../../assets/leaf.png'; // Replace with actual icons
-import descriptionImg from '../../assets/description.jpg'; // Replace with actual image
+import descriptionImg from '../../assets/DescriptionImg.png'; // Replace with actual image
 
 
 const AyurvedicBenefits = () => {
@@ -115,7 +115,7 @@ const AyurvedicBenefits = () => {
 
 
             <div className='mt-5'>
-                <img src={descriptionImg} className='w-100 h-100'/>
+                <img src={descriptionImg} className='w-100 h-100' style={{wid:"100%"}}/>
             </div>
 
             <div class="green-line"></div>
